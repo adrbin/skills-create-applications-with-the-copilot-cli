@@ -28,6 +28,27 @@ function divide(a, b) {
   return a / b;
 }
 
+// Modulo: returns the remainder of a divided by b
+function modulo(a, b) {
+  if (b === 0) {
+    throw new Error('Cannot perform modulo by zero');
+  }
+  return a % b;
+}
+
+// Power: returns base raised to the exponent
+function power(base, exponent) {
+  return Math.pow(base, exponent);
+}
+
+// Square Root: returns the square root of n
+function squareRoot(n) {
+  if (n < 0) {
+    throw new Error('Cannot calculate square root of negative number');
+  }
+  return Math.sqrt(n);
+}
+
 // Main calculator function that accepts operands and operator
 function calculate(operand1, operator, operand2) {
   switch (operator) {
@@ -39,6 +60,12 @@ function calculate(operand1, operator, operand2) {
       return multiply(operand1, operand2);
     case '/':
       return divide(operand1, operand2);
+    case '%':
+      return modulo(operand1, operand2);
+    case '^':
+      return power(operand1, operand2);
+    case 'sqrt':
+      return squareRoot(operand1);
     default:
       throw new Error(`Unsupported operator: ${operator}`);
   }
@@ -51,6 +78,9 @@ if (typeof module !== 'undefined' && module.exports) {
     subtract,
     multiply,
     divide,
+    modulo,
+    power,
+    squareRoot,
     calculate
   };
 }
@@ -61,7 +91,8 @@ if (require.main === module) {
 
   if (args.length !== 3) {
     console.error('Usage: calculator <operand1> <operator> <operand2>');
-    console.error('Operators: + (addition), - (subtraction), * (multiplication), / (division)');
+    console.error('Operators: + (addition), - (subtraction), * (multiplication), / (division), % (modulo), ^ (power)');
+    console.error('Special operators: sqrt <number> (square root)');
     process.exit(1);
   }
 
